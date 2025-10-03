@@ -1,0 +1,8 @@
+workingpath: '/media/sf_VMShare/CIDH/'
+excelfile: 'Consolidated Gap Analysis.xlsx'
+worksheet: 'Base and Clinical Data File'
+mdffile: 'CIDC_model.yml'
+separate_files: True
+mdffiles:
+  - PropDefinitions: 'CIDC_model_properties.yml'
+  - Terms: 'CIDC_model_terms.yml'

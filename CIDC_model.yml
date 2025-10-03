@@ -1,0 +1,1184 @@
+Handle: CIDC
+Nodes:
+    Additional_Treatment:
+        Props:
+        - 'Additional therapy '
+        - Days to additional therapy dose
+    Adverse_Event:
+        Props:
+        - Adverse Event System Organ Class
+        - Adverse Event attribution to study treatment
+        - Adverse Event code
+        - Adverse Event grading system
+        - Adverse Event grading system version
+        - Adverse Event severity grade
+        - Adverse Event term
+        - Days to onset of Adverse Event
+        - Days to resolution of Adverse Event
+        - Discontinuation due to Adverse Event
+        - Dose-Limiting Toxicity
+        - Serious Adverse Event
+    Comorbidities:
+        Props:
+        - Comorbidities
+    Demographics:
+        Props:
+        - Age
+        - Body Mass Index
+        - Body Surface Area
+        - ECOG_PS
+        - Ethnicity
+        - Height
+        - Karnofsky (KPS)
+        - Race
+        - Received protocol treatment
+        - Sex
+        - 'Weight '
+    Demographics, Specimen_Collection, etc.:
+        Props:
+        - Patient identifier
+    Disease:
+        Props:
+        - Cancer stage
+        - Cancer type - MedDRA code
+        - Cancer type, coded
+        - Cancer type, descriptive
+        - Days since original diagnosis
+        - Extramedullary organs involved
+        - Liver metastases at registration
+        - Primary disease site
+        - Soley extramedullary AML
+        - Tumor grade
+        - Tumor grade, descriptive
+        - disease_staging_system
+        - disease_staging_system_version
+        - 'tumor_stage_clinical_t
+
+            tumor_stage_clinical_n
+
+            tumor_stage_clinical_m'
+    GVHD_Post-enrollment:
+        Props:
+        - GVHD affected organ post-enrollment
+        - GVHD grade post-enrollment
+        - 'GVHD multiple organs involved '
+        - GVHD post-enrollment
+        - GVHD staging post-enrollment
+        - GVHD type post-enrollment
+    History:
+        Props:
+        - Best response to prior therapy
+        - Conditioning chemotherapy
+        - Conditioning regimen type for transplant
+        - Days from transplant to study treatment initiation
+        - History of autoimmune disorder
+        - History of autoimmune disorder, description
+        - Immunosuppressive therapy/GVHD prophylaxis for transplant
+        - Number of prior systemic treatments
+        - Pack years smoked
+        - Post-transplant salvage therapy
+        - Prior chemotherapy
+        - Prior immunotherapy
+        - Prior malignancies
+        - Prior other therapy
+        - Prior radiation therapy
+        - Prior surgery
+        - 'Prior targeted therapy '
+        - Prior therapy - any type
+        - Stem cell transplant
+        - Tobacco smoking status
+    History_Description:
+        Props:
+        - Best response to respective prior therapy
+        - Prior therapy description
+        - Prior therapy type
+        - Stem cell donor type
+    History_GVHD:
+        Props:
+        - Prior GVHD
+        - Prior GVHD affected organ
+        - Prior GVHD grade
+        - Prior GVHD staging
+        - Prior GVHD type
+    Molecular_Features:
+        Props:
+        - Cytogenetics (bone marrow)
+        - Flow Cytometry (bone marrow)
+        - Molecular Features at study registration (anchor date)
+        - Mutations (bone marrow)
+        - Myeloid chimerism (%)
+        - T-cell chimerism (%)
+    Response:
+        Props:
+        - Abscopal response
+        - Best overall response by RECIST
+        - Cause of death
+        - Days to best response
+        - Days to death
+        - Days to disease progression
+        - Days to first response
+        - Days to last available follow-up
+        - Death
+        - Durable clinical benefit
+        - Duration of response
+        - Evaluable for efficacy
+        - Evaluable for toxicity
+        - Overall survival
+        - Pathological complete response (pCR)
+        - Progression
+        - Progression-free survival
+        - Progression-free survival event
+        - System used for assessing response
+        - Use of immune-related response criteria
+        - Version of system used for assessing response
+    Sample:
+        Props:
+        - description_of_sample
+    Specialized_Data:
+        Props:
+        - Non-CIMAC Molecular Tests During Study
+        - Unique cases
+    Specimen_Collection:
+        Props:
+        - Assay type
+        - 'Collection event name '
+        - Days between specimen collection and last study treatment
+        - Days to specimen collection
+        - Ischemic time
+        - Organ site of collection
+        - Specimen ID
+        - Specimen type
+        - Time fixed in formalin
+        - Tissue type
+    Study:
+        Props:
+        - AE data description
+        - Age group
+        - Patient Identifier
+        - Study Outcome, Objective response rate
+        - Study population
+        - Trial type
+    Treatment:
+        Props:
+        - Cohort (Subgroup)
+        - Off study
+        - Off treatment
+        - Other Reason Off Study Off Treatment, description
+        - Patient Off Study Off Treatment Reason
+        - SurgicalProcedure
+        - Treatment Arm
+    Treatment_Dose:
+        Props:
+        - Course number
+        - Days to treatment dose
+        - Dose changes and delays
+        - Dose changes and delays description
+        - Dose received
+        - Dose received UOM
+        - Planned dose level
+        - Planned dose level UOM
+        - Treatment name
+    aliquot:
+        Props:
+        - aliquot_amount
+        - aliquot_replacement
+        - aliquot_status
+        - extracted_concentration
+        - lymphocyte_influx
+        - material_extracted
+        - quantity
+        - slide_number
+    artifact_core:
+        Props:
+        - artifact_category
+        - artifact_creator
+        - data_format
+        - facet_group
+        - file_name
+        - file_size_bytes
+        - md5_hash, crc32c_hash
+        - object_url
+        - upload_placeholder
+        - uploaded_timestamp
+        - uploader
+        - uuid
+        - visible
+    clinical_data:
+        Props:
+        - assay_creator
+        - records
+    clinical_data->record:
+        Props:
+        - clinical_file
+        - comment
+    clinical_trial:
+        Props:
+        - allowed_cohort_names
+        - allowed_collection_event_names
+        - analysis
+        - assays
+        - biobank
+        - biomarker_plan
+        - clinical_data
+        - data_sharing_plan
+        - expected_assays
+        - grant_or_affiliated_network
+        - justification
+        - lead_cimac_contacts
+        - lead_cimac_pis
+        - lead_trial_staff
+        - nci_id
+        - nct_id
+        - participants
+        - protocol_identifier
+        - schema
+        - shipments
+        - trial_description
+        - trial_name
+        - trial_organization
+        - trial_status
+    participant:
+        Props:
+        - cimac_participant_id
+        - cohort_name
+        - essential_patient_entry_number
+        - ethnicity
+        - gender
+        - race
+        - samples
+    sample:
+        Props:
+        - a260_a230
+        - box_number
+        - cimac_id
+        - clinical_report_id
+        - collection_event_name
+        - comments
+        - core_number
+        - diagnosis_verification
+        - din
+        - fibrosis_area_percentage
+        - fixation_stabilization_type
+        - histology_behavior
+        - histology_behavior_description
+        - intended_assay
+        - material_remaining
+        - material_remaining_units
+        - material_storage_condition
+        - material_used
+        - material_used_units
+        - necrosis_area_percentage
+        - parent_sample_id
+        - pbmc_recovery
+        - pbmc_resting_period_used
+        - pbmc_viability
+        - processed_sample_concentration
+        - processed_sample_concentration_units
+        - processed_sample_derivative
+        - processed_sample_id
+        - processed_sample_quantity
+        - processed_sample_type
+        - processed_sample_volume
+        - processed_sample_volume_units
+        - quality_of_sample
+        - residual_sample_use
+        - sample_collection_procedure
+        - sample_collection_procedure_other
+        - sample_derivative_concentration
+        - sample_derivative_concentration_units
+        - sample_derivative_volume
+        - sample_derivative_volume_units
+        - sample_location
+        - sample_replacement
+        - sample_volume
+        - sample_volume_units
+        - shipping_entry_number
+        - site_description
+        - surgical_pathology_report_id
+        - topography_code
+        - topography_description
+        - tumor_tissue_total_area_percentage
+        - type_of_primary_container
+        - type_of_primary_container_other
+        - type_of_sample
+        - type_of_sample_other
+        - type_of_tumor_sample
+        - viable_stroma_area_percentage
+        - viable_tumor_area_percentage
+    shipping_core:
+        Props:
+        - assay_priority
+        - assay_type
+        - courier
+        - date_received
+        - date_shipped
+        - manifest_id
+        - quality_of_shipment
+        - receiving_party
+        - ship_from_city
+        - ship_from_country
+        - ship_from_name
+        - ship_from_sender_email
+        - ship_from_sender_person_name
+        - ship_from_sender_phone
+        - ship_from_state
+        - ship_from_street1
+        - ship_from_street2
+        - ship_from_zip
+        - ship_to_city
+        - ship_to_country
+        - ship_to_name
+        - ship_to_state
+        - ship_to_street1
+        - ship_to_street2
+        - ship_to_zip
+        - shipping_condition
+        - shipping_condition_other
+        - tracking_number
+PropDefinitions:
+    AE data description:
+        Req: 'No'
+        Type: 'string '
+    Abscopal response:
+        Req: 'No'
+        Type: string
+    'Additional therapy ':
+        Req: 'No'
+        Type: string
+    Adverse Event System Organ Class:
+        Req: 'No'
+        Type: string
+    Adverse Event attribution to study treatment:
+        Req: 'No'
+        Type: string
+    Adverse Event code:
+        Req: 'No'
+        Type: string
+    Adverse Event grading system:
+        Req: 'No'
+        Type: string
+    Adverse Event grading system version:
+        Req: 'No'
+        Type: string
+    Adverse Event severity grade:
+        Req: 'No'
+        Type: string
+    Adverse Event term:
+        Req: 'No'
+        Type: string
+    Age:
+        Req: 'No'
+        Type: string
+    Age group:
+        Req: 'No'
+        Type: 'string '
+    Assay type:
+        Req: 'No'
+        Type: string
+    Best overall response by RECIST:
+        Req: 'No'
+        Type: string
+    Best response to prior therapy:
+        Req: 'No'
+        Type: string
+    Best response to respective prior therapy:
+        Req: 'No'
+        Type: string
+    Body Mass Index:
+        Req: 'No'
+        Type: float
+    Body Surface Area:
+        Req: 'No'
+        Type: float
+    Cancer stage:
+        Req: 'No'
+        Type: string
+    Cancer type - MedDRA code:
+        Req: 'No'
+        Type: '-'
+    Cancer type, coded:
+        Req: 'No'
+        Type: string
+    Cancer type, descriptive:
+        Req: 'No'
+        Type: string
+    Cause of death:
+        Req: 'No'
+        Type: string
+    Cohort (Subgroup):
+        Req: 'No'
+        Type: string
+    'Collection event name ':
+        Req: 'No'
+        Type: string
+    Comorbidities:
+        Req: 'No'
+        Type: .nan
+    Conditioning chemotherapy:
+        Req: 'No'
+        Type: string
+    Conditioning regimen type for transplant:
+        Req: 'No'
+        Type: string
+    Course number:
+        Req: 'No'
+        Type: 'string '
+    Cytogenetics (bone marrow):
+        Req: 'No'
+        Type: .nan
+    Days between specimen collection and last study treatment:
+        Req: 'No'
+        Type: int
+    Days from transplant to study treatment initiation:
+        Req: 'No'
+        Type: int
+    Days since original diagnosis:
+        Req: 'No'
+        Type: int
+    Days to additional therapy dose:
+        Req: 'No'
+        Type: int
+    Days to best response:
+        Req: 'No'
+        Type: int
+    Days to death:
+        Req: 'No'
+        Type: int
+    Days to disease progression:
+        Req: 'No'
+        Type: int
+    Days to first response:
+        Req: 'No'
+        Type: int
+    Days to last available follow-up:
+        Req: 'No'
+        Type: int
+    Days to onset of Adverse Event:
+        Req: 'No'
+        Type: int
+    Days to resolution of Adverse Event:
+        Req: 'No'
+        Type: int
+    Days to specimen collection:
+        Req: 'No'
+        Type: int
+    Days to treatment dose:
+        Req: 'No'
+        Type: int
+    Death:
+        Req: 'No'
+        Type: string
+    Discontinuation due to Adverse Event:
+        Req: 'No'
+        Type: string
+    Dose changes and delays:
+        Req: 'No'
+        Type: string
+    Dose changes and delays description:
+        Req: 'No'
+        Type: string
+    Dose received:
+        Req: 'No'
+        Type: float
+    Dose received UOM:
+        Req: 'No'
+        Type: string
+    Dose-Limiting Toxicity:
+        Req: 'No'
+        Type: string
+    Durable clinical benefit:
+        Req: 'No'
+        Type: string
+    Duration of response:
+        Req: 'No'
+        Type: int
+    ECOG_PS:
+        Req: 'No'
+        Type: string
+    Ethnicity:
+        Req: 'No'
+        Type: string
+    Evaluable for efficacy:
+        Req: 'No'
+        Type: string
+    Evaluable for toxicity:
+        Req: 'No'
+        Type: string
+    Extramedullary organs involved:
+        Req: 'No'
+        Type: string
+    Flow Cytometry (bone marrow):
+        Req: 'No'
+        Type: .nan
+    GVHD affected organ post-enrollment:
+        Req: 'No'
+        Type: string
+    GVHD grade post-enrollment:
+        Req: 'No'
+        Type: string
+    'GVHD multiple organs involved ':
+        Req: 'No'
+        Type: string
+    GVHD post-enrollment:
+        Req: 'No'
+        Type: string
+    GVHD staging post-enrollment:
+        Req: 'No'
+        Type: string
+    GVHD type post-enrollment:
+        Req: 'No'
+        Type: string
+    Height:
+        Req: 'No'
+        Type: float
+    History of autoimmune disorder:
+        Req: 'No'
+        Type: string
+    History of autoimmune disorder, description:
+        Req: 'No'
+        Type: string
+    Immunosuppressive therapy/GVHD prophylaxis for transplant:
+        Req: 'No'
+        Type: string
+    Ischemic time:
+        Req: 'No'
+        Type: float
+    Karnofsky (KPS):
+        Req: 'No'
+        Type: int
+    Liver metastases at registration:
+        Req: 'No'
+        Type: string
+    Molecular Features at study registration (anchor date):
+        Req: 'No'
+        Type: .nan
+    Mutations (bone marrow):
+        Req: 'No'
+        Type: .nan
+    Myeloid chimerism (%):
+        Req: 'No'
+        Type: .nan
+    Non-CIMAC Molecular Tests During Study:
+        Req: 'No'
+        Type: .nan
+    Number of prior systemic treatments:
+        Req: 'No'
+        Type: int
+    Off study:
+        Req: 'No'
+        Type: string
+    Off treatment:
+        Req: 'No'
+        Type: string
+    Organ site of collection:
+        Req: 'No'
+        Type: string
+    Other Reason Off Study Off Treatment, description:
+        Req: 'No'
+        Type: string
+    Overall survival:
+        Req: 'No'
+        Type: int
+    Pack years smoked:
+        Req: 'No'
+        Type: float
+    Pathological complete response (pCR):
+        Req: 'No'
+        Type: string
+    Patient Identifier:
+        Req: 'No'
+        Type: string
+    Patient Off Study Off Treatment Reason:
+        Req: 'No'
+        Type: string
+    Patient identifier:
+        Req: 'No'
+        Type: string
+    Planned dose level:
+        Req: 'No'
+        Type: float
+    Planned dose level UOM:
+        Req: 'No'
+        Type: string
+    Post-transplant salvage therapy:
+        Req: 'No'
+        Type: string
+    Primary disease site:
+        Req: 'No'
+        Type: string
+    Prior GVHD:
+        Req: 'No'
+        Type: string
+    Prior GVHD affected organ:
+        Req: 'No'
+        Type: string
+    Prior GVHD grade:
+        Req: 'No'
+        Type: string
+    Prior GVHD staging:
+        Req: 'No'
+        Type: string
+    Prior GVHD type:
+        Req: 'No'
+        Type: string
+    Prior chemotherapy:
+        Req: 'No'
+        Type: string
+    Prior immunotherapy:
+        Req: 'No'
+        Type: string
+    Prior malignancies:
+        Req: 'No'
+        Type: string
+    Prior other therapy:
+        Req: 'No'
+        Type: string
+    Prior radiation therapy:
+        Req: 'No'
+        Type: string
+    Prior surgery:
+        Req: 'No'
+        Type: string
+    'Prior targeted therapy ':
+        Req: 'No'
+        Type: string
+    Prior therapy - any type:
+        Req: 'No'
+        Type: string
+    Prior therapy description:
+        Req: 'No'
+        Type: string
+    Prior therapy type:
+        Req: 'No'
+        Type: string
+    Progression:
+        Req: 'No'
+        Type: string
+    Progression-free survival:
+        Req: 'No'
+        Type: int
+    Progression-free survival event:
+        Req: 'No'
+        Type: string
+    Race:
+        Req: 'No'
+        Type: string
+    Received protocol treatment:
+        Req: 'No'
+        Type: string
+    Serious Adverse Event:
+        Req: 'No'
+        Type: string
+    Sex:
+        Req: 'No'
+        Type: string
+    Soley extramedullary AML:
+        Req: 'No'
+        Type: string
+    Specimen ID:
+        Req: 'No'
+        Type: string
+    Specimen type:
+        Req: 'No'
+        Type: string
+    Stem cell donor type:
+        Req: 'No'
+        Type: string
+    Stem cell transplant:
+        Req: 'No'
+        Type: string
+    Study Outcome, Objective response rate:
+        Req: 'No'
+        Type: 'string '
+    Study population:
+        Req: 'No'
+        Type: 'string '
+    SurgicalProcedure:
+        Req: 'No'
+        Type: 'string '
+    System used for assessing response:
+        Req: 'No'
+        Type: string
+    T-cell chimerism (%):
+        Req: 'No'
+        Type: .nan
+    Time fixed in formalin:
+        Req: 'No'
+        Type: float
+    Tissue type:
+        Req: 'No'
+        Type: string
+    Tobacco smoking status:
+        Req: 'No'
+        Type: string
+    Treatment Arm:
+        Req: 'No'
+        Type: string
+    Treatment name:
+        Req: 'No'
+        Type: string
+    Trial type:
+        Req: 'No'
+        Type: '?'
+    Tumor grade:
+        Req: 'No'
+        Type: string
+    Tumor grade, descriptive:
+        Req: 'No'
+        Type: string
+    Unique cases:
+        Req: 'No'
+        Type: .nan
+    Use of immune-related response criteria:
+        Req: 'No'
+        Type: string
+    Version of system used for assessing response:
+        Req: 'No'
+        Type: string
+    'Weight ':
+        Req: 'No'
+        Type: float
+    a260_a230:
+        Req: 'No'
+        Type: '["number", "string"],'
+    aliquot_amount:
+        Req: 'No'
+        Type: string
+    aliquot_replacement:
+        Req: 'No'
+        Type: string
+    aliquot_status:
+        Req: 'No'
+        Type: enum
+    allowed_cohort_names:
+        Req: 'No'
+        Type: array(string)
+    allowed_collection_event_names:
+        Req: 'No'
+        Type: array(string)
+    analysis:
+        Req: 'No'
+        Type: array(analysis_
+    artifact_category:
+        Req: 'No'
+        Type: enum
+    artifact_creator:
+        Req: 'No'
+        Type: enum
+    assay_creator:
+        Req: 'No'
+        Type: enum
+    assay_priority:
+        Req: 'No'
+        Type: enum
+    assay_type:
+        Req: 'No'
+        Type: enum
+    assays:
+        Req: 'No'
+        Type: array(assay)
+    biobank:
+        Req: 'No'
+        Type: string
+    biomarker_plan:
+        Req: 'No'
+        Type: string
+    box_number:
+        Req: 'No'
+        Type: string
+    cimac_id:
+        Req: 'No'
+        Type: regex
+    cimac_participant_id:
+        Req: 'No'
+        Type: regex
+    clinical_data:
+        Req: 'No'
+        Type: clinical_data
+    clinical_file:
+        Req: 'No'
+        Type: anyOf(...)
+    clinical_report_id:
+        Req: 'No'
+        Type: encrypt(string)
+    cohort_name:
+        Req: 'No'
+        Type: string
+    collection_event_name:
+        Req: 'No'
+        Type: string
+    comment:
+        Req: 'No'
+        Type: string
+    comments:
+        Req: 'No'
+        Type: string
+    core_number:
+        Req: 'No'
+        Type: string
+    courier:
+        Req: 'No'
+        Type: enum
+    data_format:
+        Req: 'No'
+        Type: '-'
+    data_sharing_plan:
+        Req: 'No'
+        Type: string
+    date_received:
+        Req: 'No'
+        Type: date
+    date_shipped:
+        Req: 'No'
+        Type: date
+    description_of_sample:
+        Req: 'No'
+        Type: enum
+    diagnosis_verification:
+        Req: 'No'
+        Type: enum
+    din:
+        Req: 'No'
+        Type: '["number", "string"],'
+    disease_staging_system:
+        Req: 'No'
+        Type: string
+    disease_staging_system_version:
+        Req: 'No'
+        Type: string
+    essential_patient_entry_number:
+        Req: 'No'
+        Type: string
+    ethnicity:
+        Req: 'No'
+        Type: enum
+    expected_assays:
+        Req: 'No'
+        Type: array(string)
+    extracted_concentration:
+        Req: 'No'
+        Type: string
+    facet_group:
+        Req: 'No'
+        Type: string
+    fibrosis_area_percentage:
+        Req: 'No'
+        Type: number
+    file_name:
+        Req: 'No'
+        Type: 'string '
+    file_size_bytes:
+        Req: 'No'
+        Type: integer
+    fixation_stabilization_type:
+        Req: 'No'
+        Type: enum
+    gender:
+        Req: 'No'
+        Type: enum
+    grant_or_affiliated_network:
+        Req: 'No'
+        Type: string
+    histology_behavior:
+        Req: 'No'
+        Type: string
+    histology_behavior_description:
+        Req: 'No'
+        Type: string
+    intended_assay:
+        Req: 'No'
+        Type: string
+    justification:
+        Req: 'No'
+        Type: string
+    lead_cimac_contacts:
+        Req: 'No'
+        Type: array(string)
+    lead_cimac_pis:
+        Req: 'No'
+        Type: array(string)
+    lead_trial_staff:
+        Req: 'No'
+        Type: array(string)
+    lymphocyte_influx:
+        Req: 'No'
+        Type: string
+    manifest_id:
+        Req: 'No'
+        Type: string
+    material_extracted:
+        Req: 'No'
+        Type: enum
+    material_remaining:
+        Req: 'No'
+        Type: number
+    material_remaining_units:
+        Req: 'No'
+        Type: enum
+    material_storage_condition:
+        Req: 'No'
+        Type: enum
+    material_used:
+        Req: 'No'
+        Type: number
+    material_used_units:
+        Req: 'No'
+        Type: enum
+    md5_hash, crc32c_hash:
+        Req: 'No'
+        Type: 'string '
+    nci_id:
+        Req: 'No'
+        Type: string
+    nct_id:
+        Req: 'No'
+        Type: string
+    necrosis_area_percentage:
+        Req: 'No'
+        Type: number
+    object_url:
+        Req: 'No'
+        Type: 'string '
+    parent_sample_id:
+        Req: 'No'
+        Type: encrypt(string)
+    participants:
+        Req: 'No'
+        Type: array(participant)
+    pbmc_recovery:
+        Req: 'No'
+        Type: number
+    pbmc_resting_period_used:
+        Req: 'No'
+        Type: enum
+    pbmc_viability:
+        Req: 'No'
+        Type: number
+    processed_sample_concentration:
+        Req: 'No'
+        Type: number
+    processed_sample_concentration_units:
+        Req: 'No'
+        Type: string
+    processed_sample_derivative:
+        Req: 'No'
+        Type: '
+
+            enum'
+    processed_sample_id:
+        Req: 'No'
+        Type: encrypt(string)
+    processed_sample_quantity:
+        Req: 'No'
+        Type: number
+    processed_sample_type:
+        Req: 'No'
+        Type: enum
+    processed_sample_volume:
+        Req: 'No'
+        Type: number
+    processed_sample_volume_units:
+        Req: 'No'
+        Type: enum
+    protocol_identifier:
+        Req: 'No'
+        Type: string
+    quality_of_sample:
+        Req: 'No'
+        Type: string
+    quality_of_shipment:
+        Req: 'No'
+        Type: enum
+    quantity:
+        Req: 'No'
+        Type: integer
+    race:
+        Req: 'No'
+        Type: enum
+    receiving_party:
+        Req: 'No'
+        Type: string
+    records:
+        Req: 'No'
+        Type: record
+    residual_sample_use:
+        Req: 'No'
+        Type: enum
+    sample_collection_procedure:
+        Req: 'No'
+        Type: enum
+    sample_collection_procedure_other:
+        Req: 'No'
+        Type: string
+    sample_derivative_concentration:
+        Req: 'No'
+        Type: number
+    sample_derivative_concentration_units:
+        Req: 'No'
+        Type: enum
+    sample_derivative_volume:
+        Req: 'No'
+        Type: number
+    sample_derivative_volume_units:
+        Req: 'No'
+        Type: enum
+    sample_location:
+        Req: 'No'
+        Type: string
+    sample_replacement:
+        Req: 'No'
+        Type: enum
+    sample_volume:
+        Req: 'No'
+        Type: number
+    sample_volume_units:
+        Req: 'No'
+        Type: enum
+    samples:
+        Req: 'No'
+        Type: array(sample)
+    schema:
+        Req: 'No'
+        Type: artifact_image
+    ship_from_city:
+        Req: 'No'
+        Type: string
+    ship_from_country:
+        Req: 'No'
+        Type: string
+    ship_from_name:
+        Req: 'No'
+        Type: string
+    ship_from_sender_email:
+        Req: 'No'
+        Type: string
+    ship_from_sender_person_name:
+        Req: 'No'
+        Type: string
+    ship_from_sender_phone:
+        Req: 'No'
+        Type: string
+    ship_from_state:
+        Req: 'No'
+        Type: string
+    ship_from_street1:
+        Req: 'No'
+        Type: string
+    ship_from_street2:
+        Req: 'No'
+        Type: string
+    ship_from_zip:
+        Req: 'No'
+        Type: string
+    ship_to_city:
+        Req: 'No'
+        Type: string
+    ship_to_country:
+        Req: 'No'
+        Type: string
+    ship_to_name:
+        Req: 'No'
+        Type: string
+    ship_to_state:
+        Req: 'No'
+        Type: string
+    ship_to_street1:
+        Req: 'No'
+        Type: string
+    ship_to_street2:
+        Req: 'No'
+        Type: string
+    ship_to_zip:
+        Req: 'No'
+        Type: string
+    shipments:
+        Req: 'No'
+        Type: array(shipping_core)
+    shipping_condition:
+        Req: 'No'
+        Type: enum
+    shipping_condition_other:
+        Req: 'No'
+        Type: string
+    shipping_entry_number:
+        Req: 'No'
+        Type: int
+    site_description:
+        Req: 'No'
+        Type: string
+    slide_number:
+        Req: 'No'
+        Type: string
+    surgical_pathology_report_id:
+        Req: 'No'
+        Type: encrypt(string)
+    topography_code:
+        Req: 'No'
+        Type: string
+    topography_description:
+        Req: 'No'
+        Type: string
+    tracking_number:
+        Req: 'No'
+        Type: string
+    trial_description:
+        Req: 'No'
+        Type: string
+    trial_name:
+        Req: 'No'
+        Type: string
+    trial_organization:
+        Req: 'No'
+        Type: string
+    trial_status:
+        Req: 'No'
+        Type: enum
+    ? 'tumor_stage_clinical_t
+
+        tumor_stage_clinical_n
+
+        tumor_stage_clinical_m'
+    :   Req: 'No'
+        Type: 'string '
+    tumor_tissue_total_area_percentage:
+        Req: 'No'
+        Type: '["number","string"],'
+    type_of_primary_container:
+        Req: 'No'
+        Type: enum
+    type_of_primary_container_other:
+        Req: 'No'
+        Type: string
+    type_of_sample:
+        Req: 'No'
+        Type: enum
+    type_of_sample_other:
+        Req: 'No'
+        Type: string
+    type_of_tumor_sample:
+        Req: 'No'
+        Type: enum
+    upload_placeholder:
+        Req: 'No'
+        Type: string
+    uploaded_timestamp:
+        Req: 'No'
+        Type: datetime
+    uploader:
+        Req: 'No'
+        Type: string
+    uuid:
+        Req: 'No'
+        Type: 'string '
+    viable_stroma_area_percentage:
+        Req: 'No'
+        Type: number
+    viable_tumor_area_percentage:
+        Req: 'No'
+        Type: number
+    visible:
+        Req: 'No'
+        Type: bool
+Relationships: {}
+Terms: {}
+Version: '0.01'
