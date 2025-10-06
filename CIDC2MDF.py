@@ -108,28 +108,12 @@ def addTerm(datamodel, df):
             description = 'None'
             cdeurl = 'None'
             if row['Permissible Value'] not in ['-', np.nan]:
-                #print(f"PV:\t {row['Permissible Value']}")
-                #print(f"Type:\t{type(row['Permissible Value'])}")
                 # These are an unholy mess, only thing to do is split on a comma
                 messylist = row['Permissible Value'].split(',')
                 termvalues = {'handle': propname, 'Enum': messylist}
                 termobj = Term(termvalues)
                 propobj = datamodel.props[(nodename, propname)]
                 datamodel.add_terms(propobj, termobj)
-
-                #for entry in messylist:
-                    #print(f"Node:\t{nodename}\tProperty:\t{propname}\tEntry:\t{entry}")
-                    #print(f"Checkit:\t {checkit}")
-                '''
-                    if entry not in checkit:
-                        # OK, Annotate is used to add Term sections.  Which is where the code below came from.  But that's not what populates Enum.  datamodel.add_term?
-                        #termvalues = {'handle': entry, 'value':entry, 'origin_version':cdever, 'origin_name':'CIDC', 'origin_id':cdeid, 'origin_definition': description, 'nanoid': cdeurl}
-                        termvalues = {'handle': entry, 'value': entry}
-                        termobj = Term(termvalues)
-                        propobj = datamodel.props[(nodename, propname)]
-                        #datamodel.annotate(propobj, termobj)
-                        datamodel.add_terms(propobj, termobj)
-                        checkit.append(entry)'''
     return datamodel
 
 
@@ -173,15 +157,12 @@ def main(args):
 
     # Add nodes
     cidc_mdf = addNodes(cidc_mdf, cidc_nodes)
-    # Add properties
+    # Add properties and Enums
     cidc_mdf = addProp(cidc_mdf, cidc_df, cidc_nodes)
     # Add terms
     #cidc_df = addTerm(cidc_mdf, cidc_df)
     # Add Enums:
     # cidc_mdf = addEnum(cidc_mdf, cidc_df)
-
-    #print(cidc_mdf.nodes.keys())
-    #print(cidc_mdf.props.keys())
 
     #Attempt to write da model
     if configs['separate_files']:
