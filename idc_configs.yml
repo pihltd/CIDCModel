@@ -1,0 +1,94 @@
+excelfile: '2025-09-24 IDC data model.xlsx'
+workingpath: '/media/sf_VMShare/IDCModel/'
+handle: IDC
+version: '0.0.1'
+mdffile: 'IDC_model.yml'
+mdffiles:
+  - PropDefinitions: 'IDC_model_properties.yml'
+  - Terms: 'IDC_model_terms.yml'
+edges:
+  - handle: of_program
+    props: None
+    mul: many_to_one
+    ends:
+      - src: 'Collection'
+        dst: 'Program'
+      - src: 'Participant'
+        dst: 'Program'
+      - src: 'Publication'
+        dst: 'Program'
+  - handle: of_collection
+    props: None
+    mul: many_to_one
+    ends:
+      - src: Collection_Authors
+        dst: Collection
+      - src: Analysis_Results
+        dst: Collection
+      - src: Publication
+        dst: Collection
+      - src: Participant
+        dst: Collection
+      - src: Histopathology_Image
+        dst: Collection
+      - src: Multiplex_Image
+        dst: Collection
+  - handle: of_analysis_results
+    props: None
+    mul: many_to_one
+    ends:
+      - src: Histopathology_Image
+        dst: Analysis_Results
+      - src: Multiplex_Image
+        dst: Analysis_Results
+      - src: Participant
+        dst: Analysis_Results
+tags:
+  - node: Program
+    nodeReq: True
+    category: 'administrative'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Collection
+    nodeReq: True
+    category: 'collection'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Collection_Authors
+    nodeReq: True
+    category: 'collection'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Analysis_Results
+    nodeReq: True
+    category: 'analysis'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Publication
+    nodeReq: True
+    category: 'Collection'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Participant
+    nodeReq: True
+    category: 'Collection'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Histopathology_Image
+    nodeReq: True
+    category: 'analysis'
+    assignment: core
+    template: 'Yes'
+    class: primary
+  - node: Multiplex_Image
+    nodeReq: True
+    category: 'analysis'
+    assignment: core
+    template: 'Yes'
+    class: primary
