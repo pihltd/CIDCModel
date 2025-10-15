@@ -64,12 +64,13 @@ def addNodes(datamodel, nodelist, verbose=0):
         datamodel.add_node(nodeobj)
     return datamodel
 
+
+
 def addProps(datamodel, nodedict, nodelist, verbose=0):
     # Add properties to each node
     for nodename in nodelist:
         working_df = nodedict[nodename]
         for index, row in working_df.iterrows():
-            #description = None
             propname = None
             if pd.notnull(row['Description']):
                 description = crdclib.cleanString(str(row['Description']), True)
@@ -86,6 +87,7 @@ def addProps(datamodel, nodedict, nodelist, verbose=0):
 
 
 
+
 def addTerms(datamodel, nodedict, nodelist, verbose=0):
     # Add CDE Term sections to properties with CDEs.
     for nodename in nodelist:
@@ -97,11 +99,10 @@ def addTerms(datamodel, nodedict, nodelist, verbose=0):
                 if pd.notnull(row['CDE']):
                     
                     cdeinfo = getCDEInfo(row['CDE'], verbose=verbose)
-                    # Do some cleaningn of returned values
+                    # Do some cleaning of returned values
                     if cdeinfo['cdedef'] is not None:
                         cdedef = crdclib.cleanString(cdeinfo['cdedef'],True)
                         cdedef = cleanHTML(cdedef)
-                        #cdedef = cleanHTML(cdeinfo['cdedef'])
                     cdeid = str(row['CDE'])
                     # For some reason, IDs out of Excel are formated like a float
                     cdeid = cdeid.split(".")[0]
@@ -149,11 +150,8 @@ def addTags(datamodel, taglist, verbose=0):
         for tagname, tagvalue in tag.items():
             tagnode = datamodel.nodes[tag['node']]
             tagdict = {'key': tagname, 'value':tagvalue}
-            #tagdict = {'nodeReq': tag['nodeReq'], 'category': tag['category'], 'assignment': tag['assignment'], 'template': tag['template']}
             tagobj = Tag(tagdict)
             tagnode.tags[tagobj.key] = tagobj
-            #datamodel.annotate(tagobj)
-            #datamodel.nodes[tag['node']].__setattr__('Tags',tagobj)
     return datamodel
         
 
