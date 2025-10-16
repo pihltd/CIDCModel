@@ -76,6 +76,7 @@ def addProp(datamodel, df, nodelist):
                     datamodel.add_terms(workingprop, *enumset)
     return datamodel
 
+'''
 def addEnum(datamodel, df):
     # Not being used
     proplist = datamodel.props
@@ -90,11 +91,12 @@ def addEnum(datamodel, df):
                 addprop = datamodel.props[(nodename,propname)]
                 datamodel.add_terms(addprop, *messylist)
     return datamodel
-
+'''
 
 
 def addTerm(datamodel, df):
     # Adds terms to a Property.  Currently not used
+    # TODO: This needs a revisit.  The ENUM stuff needs to be removed, those are set in Props, not Terms.
     proplist = df['Property'].unique()
     # This is a stupid safety valve because some rows are multi-mapped and therefore terms are duplicated.
     checkit = []
