@@ -1,4 +1,5 @@
 excelfile: '2025-09-24 IDC data model.xlsx'
+csvfile: '2025-09-26 all nodes and properties.csv'
 workingpath: '/media/sf_VMShare/IDCModel/'
 handle: IDC
 version: '0.0.1'
@@ -8,41 +9,75 @@ mdffiles:
   - Terms: 'IDC_model_terms.yml'
 edges:
   - handle: of_program
+    desc: "A collection belongs to a program"
     props: None
     mul: many_to_one
     ends:
       - src: 'Collection'
         dst: 'Program'
-      - src: 'Participant'
-        dst: 'Program'
-      - src: 'Publication'
-        dst: 'Program'
-  - handle: of_collection
+      #- src: 'Participant'
+      #  dst: 'Program'
+      #- src: 'Publication'
+      #  dst: 'Program'
+  - handle: of_collection_authors
+    desc: "A collection has one or more authors."
     props: None
-    mul: many_to_one
+    mul: one_to_many
     ends:
       - src: Collection_Authors
         dst: Collection
-      - src: Analysis_Results
-        dst: Collection
-      - src: Publication
-        dst: Collection
-      - src: Participant
-        dst: Collection
-      - src: Histopathology_Image
-        dst: Collection
-      - src: Multiplex_Image
-        dst: Collection
-  - handle: of_analysis_results
+  - handle: of_publication
+    desc: "A collection can have multiple publications."
     props: None
-    mul: many_to_one
+    mul: one_to_many
     ends:
-      - src: Histopathology_Image
+      - src: Collection
+        dst: Publication
+  - handle: of_participant
+    desc: "A collection has multiple participants."
+    props: None
+    mul: one_to_many
+    ends:
+      - src: Collection
+        dst: Participant
+  - handle: of_analysis_results
+    desc: "A collection can have analysis results."
+    props: None
+    mul: one_to_one
+    ends:
+      - src: Collection
         dst: Analysis_Results
-      - src: Multiplex_Image
-        dst: Analysis_Results
+  - handle: of_image
+    desc: "A participant can have multiple images."
+    mul: one_to_many
+    ends:
       - src: Participant
-        dst: Analysis_Results
+        dst: Multiplex_Image
+      - src: Participant
+        dst: Histopathology_Image
+  
+      #- src: Collection_Authors
+      #  dst: Collection
+      #- src: Analysis_Results
+      #  dst: Collection
+      #- src: Publication
+      #  dst: Collection
+      #- src: Participant
+      #  dst: Collection
+      #- src: Histopathology_Image
+      #  dst: Collection
+      #- src: Multiplex_Image
+      #  dst: Collection
+  #- handle: of_analysis_results
+  #  props: None
+  #  mul: many_to_one
+  #  ends:
+  #    - src: Histopathology_Image
+  #      dst: Analysis_Results
+  #    - src: Multiplex_Image
+  #      dst: Analysis_Results
+  #    - src: Participant
+  #      dst: Analysis_Results
 tags:
   - node: Program
     nodeReq: True

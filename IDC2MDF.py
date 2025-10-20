@@ -1,19 +1,15 @@
-import bento_mdf
-import bento_meta
 from bento_mdf import MDFWriter
-from bento_meta.model import Model, Node, Property, Term, Edge, Tag
+from bento_meta.model import Model
 import argparse
 import pandas as pd
-import numpy as np
 from crdclib import crdclib
 import requests
 import json
-import yaml
-import re
+
+
 
 
 def cleanHTML(inputstring):
-    #outputstring = re.sub(r"<.*?>", "", inputstring)
     outputstring = inputstring.replace("<br>", "")
     return outputstring
 
@@ -57,62 +53,44 @@ def getCDEInfo(cdeid, version=None, verbose=0):
 
 
 
-def addNodes(datamodel, nodelist, verbose=0):
-    # Add a list of nodes to the model
-    for node in nodelist:
-        nodeobj = Node({'handle': node})
-        datamodel.add_node(nodeobj)
-    return datamodel
 
-
-
-def addProps(datamodel, nodedict, nodelist, verbose=0):
-    # Add properties to each node
-    for nodename in nodelist:
-        working_df = nodedict[nodename]
-        for index, row in working_df.iterrows():
-            propname = None
+def addProps(datamodel, nodedict, add_node=False):
+    node_prop_dict = {}
+    for node, workign_df in nodedict.items():
+        node_prop_dict[node] = []
+        for index, row in workign_df.iterrows():
+            valtype = 'String'
             if pd.notnull(row['Description']):
                 description = crdclib.cleanString(str(row['Description']), True)
                 description = cleanHTML(description)
+            else:
+                description = None
             if pd.notnull(row['Property']):
                 propname = crdclib.cleanString(row['Property'], True)
                 propname = cleanHTML(propname)
-            if propname is not None:
-                propdict = {'handle': propname, "_parent_handle": nodename, 'is_required': 'No', 'value_domain': 'String', 'desc': description}
-                propobj = Property(propdict)
-                nodeobj = datamodel.nodes[nodename]
-                datamodel.add_prop(nodeobj, propobj)
+            tempinfo = {'prop': propname, "_parent_handle": node, 'isreq': 'No', 'val': valtype, 'desc': description}
+            node_prop_dict[node].append(tempinfo)
+    datamodel = crdclib.mdfAddProperty(datamodel, node_prop_dict, False)
     return datamodel
 
 
 
 
-def addTerms(datamodel, nodedict, nodelist, verbose=0):
-    # Add CDE Term sections to properties with CDEs.
-    for nodename in nodelist:
-        working_df = nodedict[nodename]
+
+def addTerms(datamodel, nodedict, verbose=0):
+    for nodename, working_df in nodedict.items():
         for index, row in working_df.iterrows():
-            if verbose >= 3:
-                print(f"Processing row:\n{row}")
             if 'CDE' in row:
                 if pd.notnull(row['CDE']):
-                    
                     cdeinfo = getCDEInfo(row['CDE'], verbose=verbose)
-                    # Do some cleaning of returned values
                     if cdeinfo['cdedef'] is not None:
                         cdedef = crdclib.cleanString(cdeinfo['cdedef'],True)
                         cdedef = cleanHTML(cdedef)
                     cdeid = str(row['CDE'])
                     # For some reason, IDs out of Excel are formated like a float
                     cdeid = cdeid.split(".")[0]
-                    cdever = str(cdeinfo['cdever'])
-                    cdename = str(cdeinfo['cdename'])
-                    # Now load up the term
-                    termvalues = {'handle': row['Property'], 'value':cdename, 'origin_version': cdever, 'origin_name':'caDSR', 'origin_id':cdeid, 'origin_definition': cdedef, 'nanoid': 'cdeurl'}
-                    termobj = Term(termvalues)
-                    propobj = datamodel.props[(nodename, row['Property'])]
-                    datamodel.annotate(propobj, termobj)
+                    termvalues = {'handle': row['Property'], 'value': cdeinfo['cdename'], 'origin_version': cdeinfo['cdever'], 'origin_name':'caDSR', 'origin_id':cdeid, 'origin_definition': cdedef, 'nanoid': 'cdeurl'}
+                    datamodel = crdclib.mdfAnnotateTerms(datamodel, nodename, row['Property'], termvalues)
     return datamodel
 
 
@@ -135,12 +113,14 @@ def writeFiles(mdf, configs, verbose=0):
 
 
 
+
+
 def addEdges(datamodel, edgelist):
-    # Add the relationships to the model from the config file
+    listofedges = []
     for edge in edgelist:
         for end in edge['ends']:
-            edgeobj = Edge({'handle':edge['handle'], 'multiplicity':edge['mul'], 'src':datamodel.nodes[end['src']], 'dst':datamodel.nodes[end['dst']]})
-            datamodel.add_edge(edgeobj)
+            listofedges.append({'handle':edge['handle'], 'multiplicity':edge['mul'], 'src': end['src'], 'dst':end['dst'], 'desc': edge['desc']})
+    datamodel = crdclib.mdfAddEdges(datamodel, listofedges)
     return datamodel
 
 
@@ -148,11 +128,11 @@ def addEdges(datamodel, edgelist):
 def addTags(datamodel, taglist, verbose=0):
     for tag in taglist:
         for tagname, tagvalue in tag.items():
-            tagnode = datamodel.nodes[tag['node']]
-            tagdict = {'key': tagname, 'value':tagvalue}
-            tagobj = Tag(tagdict)
-            tagnode.tags[tagobj.key] = tagobj
+            datamodel = crdclib.mdfAddTags(datamodel, 'node', tag['node'], {'key':tagname, 'value':tagvalue})
     return datamodel
+
+
+
         
 
 def main(args):
@@ -162,7 +142,8 @@ def main(args):
     configs = crdclib.readYAML(args.configfile)
     nodedict = {}
 
-    #Read the Excel file
+    #Read the input file
+    
     if args.verbose >= 1:
         print(f"Reading Excel file {configs['excelfile']}")
     xlfile = pd.ExcelFile(configs['workingpath']+configs['excelfile'])
@@ -182,22 +163,22 @@ def main(args):
     # Add nodes
     if args.verbose >= 1:
         print('Adding nodes to the model')
-    idc_mdf = addNodes(idc_mdf, list(nodedict.keys()), args.verbose)
-
+    idc_mdf = crdclib.mdfAddNodes(idc_mdf, list(nodedict.keys()))
+    
     # Add properties
     if args.verbose >= 1:
         print("Adding properties to the model")
-    idc_mdf = addProps(idc_mdf, nodedict, list(nodedict.keys()), args.verbose)
+    idc_mdf = addProps(idc_mdf, nodedict, False)
 
     # Add terms
     if args.verbose >= 1:
         print('Adding CDE Terms to model')
-    idc_mdf = addTerms(idc_mdf, nodedict, list(nodedict.keys()), args.verbose)
+    idc_mdf = addTerms(idc_mdf, nodedict, args.verbose)
 
     #Add node tags
     if args.verbose >=1:
         print('Adding tags to nodes')
-    idc_mdf = addTags(idc_mdf, configs['tags'], args.verbose)
+    idc_mdf = addTags(idc_mdf, configs['tags'], args.verbose )
 
     # Add edges if they are provided in the configs file
     if 'edges' in configs:
@@ -205,8 +186,6 @@ def main(args):
             if args.verbose >= 1:
                 print("Adding relationships to the model")
             idc_mdf = addEdges(idc_mdf, configs['edges'])
-
-    #idc_mdf.
 
     # Write out the files
     if args.verbose >= 1:
