@@ -82,7 +82,8 @@ def addTerms(datamodel, nodedict, verbose=0):
         for index, row in working_df.iterrows():
             if 'CDE' in row:
                 if pd.notnull(row['CDE']):
-                    cdeinfo = getCDEInfo(row['CDE'], verbose=verbose)
+                    #cdeinfo = getCDEInfo(row['CDE'], verbose=verbose)
+                    cdeinfo = crdclib.getCDEInfo(row['CDE'])
                     if cdeinfo['cdedef'] is not None:
                         cdedef = crdclib.cleanString(cdeinfo['cdedef'],True)
                         cdedef = cleanHTML(cdedef)
