@@ -1,83 +1,47 @@
-excelfile: '2025-09-24 IDC data model.xlsx'
-csvfile: '2025-09-26 all nodes and properties.csv'
+excelfile: 'Imaging submission data model.xlsx'
+#csvfile: '2025-09-26 all nodes and properties.csv'
 workingpath: '/media/sf_VMShare/IDCModel/'
-handle: IDC
-version: '0.0.1'
-mdffile: 'IDC_model.yml'
+excludetabs: 
+  - 'Schema'
+  - 'Changes'
+  - 'DELETED - Test'
+handle: NCIISM
+version: '0.0.2'
+#mdffile: 'nci_imaging_submission_model.yml'
 mdffiles:
-  - PropDefinitions: 'IDC_model_properties.yml'
-  - Terms: 'IDC_model_terms.yml'
-edges:
-  - handle: of_program
-    desc: "A collection belongs to a program"
-    props: None
-    mul: many_to_one
-    ends:
-      - src: 'Collection'
-        dst: 'Program'
-      #- src: 'Participant'
-      #  dst: 'Program'
-      #- src: 'Publication'
-      #  dst: 'Program'
-  - handle: of_collection_authors
-    desc: "A collection has one or more authors."
-    props: None
-    mul: one_to_many
-    ends:
-      - src: Collection_Authors
-        dst: Collection
-  - handle: of_publication
-    desc: "A collection can have multiple publications."
-    props: None
-    mul: one_to_many
-    ends:
-      - src: Collection
-        dst: Publication
-  - handle: of_participant
-    desc: "A collection has multiple participants."
-    props: None
-    mul: one_to_many
-    ends:
-      - src: Collection
-        dst: Participant
-  - handle: of_analysis_results
-    desc: "A collection can have analysis results."
-    props: None
-    mul: one_to_one
-    ends:
-      - src: Collection
-        dst: Analysis_Results
-  - handle: of_image
-    desc: "A participant can have multiple images."
-    mul: one_to_many
-    ends:
-      - src: Participant
-        dst: Multiplex_Image
-      - src: Participant
-        dst: Histopathology_Image
-  
-      #- src: Collection_Authors
-      #  dst: Collection
-      #- src: Analysis_Results
-      #  dst: Collection
-      #- src: Publication
-      #  dst: Collection
-      #- src: Participant
-      #  dst: Collection
-      #- src: Histopathology_Image
-      #  dst: Collection
-      #- src: Multiplex_Image
-      #  dst: Collection
-  #- handle: of_analysis_results
-  #  props: None
-  #  mul: many_to_one
-  #  ends:
-  #    - src: Histopathology_Image
-  #      dst: Analysis_Results
-  #    - src: Multiplex_Image
-  #      dst: Analysis_Results
-  #    - src: Participant
-  #      dst: Analysis_Results
+  - Model: 'nci_imaging_submission_model.yml'
+  - PropDefinitions: 'nci_imaging_submission_model_properties.yml'
+  - Terms: 'nci_imaging_submission_model_terms.yml'
+#edges:
+#  - handle: of_dataset
+#    desc: "Dataset reltaed information"
+#    #props: None
+#    mul: one_to_many
+#    ends:
+#      - src: Dataset
+#        dst: Investigator
+#      - src: Dataset
+#        dst: Related_Work
+#  - handle: of_procedure
+#    desc: "Procudure related data"
+#    #props: None
+#    mul: one_to_many
+#    ends:
+#      - src: Procedure
+#        dst: Diagnosis
+#      - src: Procedure
+#        dst: Radiology
+#      - src: Procedure
+#        dst: Histopathology
+#      - src: Procedure
+#        dst: Multiplex_Imaging
+#  - handle: has_channels
+#    desc: 'Multiplex Imaging channels'
+#    #props: None
+#    mul: one_to_many
+#    ends:
+#      - src: Multiplex_Channels
+#        dst: Multiplex_Imaging#
 tags:
   - node: Program
     nodeReq: True
@@ -85,45 +49,65 @@ tags:
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Collection
+  - node: Dataset
     nodeReq: True
-    category: 'collection'
+    category: 'study'
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Collection_Authors
+  - node: Subject
     nodeReq: True
-    category: 'collection'
+    category: 'case'
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Analysis_Results
+  - node: Procedure
     nodeReq: True
-    category: 'analysis'
+    category: 'case'
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Publication
+  - node: File
     nodeReq: True
-    category: 'Collection'
+    category: 'data file'
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Participant
+  - node: Diagnosis
     nodeReq: True
-    category: 'Collection'
+    category: 'case'
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Histopathology_Image
+  - node: Investigator
     nodeReq: True
-    category: 'analysis'
+    category: 'administrative'
     assignment: core
     template: 'Yes'
     class: primary
-  - node: Multiplex_Image
+  - node: Related_Work
     nodeReq: True
-    category: 'analysis'
+    category: 'administrative'
     assignment: core
     template: 'Yes'
     class: primary
+  - node: Radiology
+    nodeReq: True
+    category: 'data file'
+    assignment: core
+    template: 'Yes'
+  - node: Histopathology
+    nodeReq: True
+    category: 'data file'
+    assignment: core
+    template: 'Yes'
+  - node: Multiplex_Imaging
+    nodeReq: True
+    category: 'data file'
+    assignment: core
+    template: 'Yes'
+  - node: Multiplex_Channels
+    nodeReq: True
+    category: 'data file'
+    assignment: core
+    template: 'Yes'
