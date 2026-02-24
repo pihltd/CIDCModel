@@ -1,10 +1,12 @@
 excelfile: 'Imaging submission data model.xlsx'
 #csvfile: '2025-09-26 all nodes and properties.csv'
 workingpath: '/media/sf_VMShare/IDCModel/'
+loadsheetpath: '/media/sf_VMShare/IDCModel/loadsheets/'
 excludetabs: 
   - 'Schema'
   - 'Changes'
   - 'DELETED - Test'
+edgesheet: 'Relationships between nodes'
 handle: NCIISM
 version: '0.0.2'
 #mdffile: 'nci_imaging_submission_model.yml'
@@ -41,7 +43,7 @@ mdffiles:
 #    mul: one_to_many
 #    ends:
 #      - src: Multiplex_Channels
-#        dst: Multiplex_Imaging#
+#        dst: Multiplex_Imaging
 tags:
   - node: Program
     nodeReq: True
