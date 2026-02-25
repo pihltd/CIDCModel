@@ -2,7 +2,6 @@ from bento_mdf import MDFWriter
 from bento_meta.model import Model
 import argparse
 import pandas as pd
-#from crdclib import crdclib
 import requests
 import json
 
@@ -12,8 +11,8 @@ from jsonschema import SchemaError, ValidationError
 from yaml.parser import ParserError
 from IPython.display import clear_output
 
-import sys
-sys.path.append('../CRDCLib/src')
+#import sys
+#sys.path.append('../CRDCLib/src')
 from crdclib import crdclib
 
 
@@ -68,46 +67,6 @@ def getCDEInfo(cdeid, version=None, verbose=0):
 
 
 
-'''def mdfAddProperty(mdfmodel, node_prop_dict, add_node = False):
-    """Adss property objects to an MDF model object.  If requested, missing nodes will be added
-
-    :param mdfmodel: An MDF model object to which nodes will be added
-    :type mdfmodel: MDF model object
-    :param node_prop_dict: A dictionary with an individual node name as key and a list of dictionaries containing property information {nodename:[{propery_description}]}
-    :type node_prop_dict: Dictionary
-    :param property_description: A dicionary {prop:property_name, isreq: Yes or No indictating if property is required, 'val': The property data type or 'value_set' if Enums are to be added, 'desc': Property description}
-    :type property_description: Dictionary
-    :param add_node: If set to true, any nodes found in node_prop_dict that are not already in the model will be added.
-    :type add_node:  Boolean, default is False
-    :return: MDF Model with additional properties added
-    :rtype: MDF Model object
-    """
-
-    for node, properties in node_prop_dict.items():
-        #if add_node:
-        #    if node not in list(mdfmodel.nodes):
-        #        mdfmodel = mdfAddNodes(mdfmodel, [node])
-        for prop_info in properties:
-            if 'iskey' in prop_info:
-                propobj =  Property({'handle': prop_info['prop'],
-                                "_parent_handle": node,
-                                'is_required': prop_info['isreq'],
-                                'is_key': prop_info['iskey'],
-                                'value_domain': prop_info['val'],
-                                'desc': prop_info['desc']})
-            else:
-                propobj = Property({'handle': prop_info['prop'],
-                                "_parent_handle": node,
-                                'is_required': prop_info['isreq'],
-                                'value_domain': prop_info['val'],
-                                'desc': prop_info['desc']})
-            nodeobj = mdfmodel.nodes[node]
-            mdfmodel.add_prop(nodeobj, propobj)
-    return mdfmodel'''
-
-
-
-
 def addProps(datamodel, nodedict, add_node=False):
     node_prop_dict = {}
     edgelist = []
@@ -125,6 +84,7 @@ def addProps(datamodel, nodedict, add_node=False):
                 tempinfo = {}
                 propname = crdclib.cleanString(row['Property'], True)
                 propname = cleanHTML(propname)
+                propname = propname.lower()
                 if row['Required/optional'] == 'R':
                     req = 'Yes'
                 tempinfo = {'prop': propname, "_parent_handle": node, 'isreq': req, 'val': valtype, 'desc': description}
@@ -152,7 +112,7 @@ def addTerms(datamodel, nodedict, verbose=0):
                     cdeid = str(row['CDE'])
                     # For some reason, IDs out of Excel are formated like a float
                     cdeid = cdeid.split(".")[0]
-                    termvalues = {'handle': row['Property'], 'value': cdeinfo['cdename'], 'origin_version': cdeinfo['cdever'], 'origin_name':'caDSR', 'origin_id':cdeid, 'origin_definition': cdedef, 'nanoid': 'cdeurl'}
+                    termvalues = {'handle': row['Property'].lower(), 'value': cdeinfo['cdename'], 'origin_version': cdeinfo['cdever'], 'origin_name':'caDSR', 'origin_id':cdeid, 'origin_definition': cdedef, 'nanoid': 'cdeurl'}
                     datamodel = crdclib.mdfAnnotateTerms(datamodel, nodename, row['Property'], termvalues)
                 elif 'Permissible values' in row:
                     if pd.notnull(row['Permissible values']):
@@ -203,7 +163,11 @@ def addEdges(datamodel, edgelist, verbose=0):
 def addTags(datamodel, taglist, verbose=0):
     for tag in taglist:
         for tagname, tagvalue in tag.items():
-            datamodel = crdclib.mdfAddTags(datamodel, 'node', tag['node'], {'key':tagname, 'value':tagvalue})
+            tagname = tagname.lower()
+            #tagvalue = tagvalue.lower()
+            #print(f"Tag name: {tagname}\nTag Value: {tagvalue}\n")
+            print(f"Datamodel: {datamodel}\nNode: {tag['node'].lower()}\n TagName: {tagname}\nTagValue: {tagvalue}\n")
+            datamodel = crdclib.mdfAddTags(datamodel, 'node', tag['node'].lower(), {'key':tagname, 'value':tagvalue})
     return datamodel
 
 
@@ -294,7 +258,8 @@ def main(args):
             edge_df = pd.read_excel(configs['workingpath']+configs['excelfile'], node)
         elif node not in configs['excludetabs']:
             temp_df = pd.read_excel(configs['workingpath']+configs['excelfile'], node)
-            nodedict[node] = temp_df
+            nodedict[node.lower()] = temp_df
+    print(f"Final node list: {list(nodedict.keys())}")
     
     # Create an empty model object
     if args.verbose >= 1:
@@ -305,6 +270,8 @@ def main(args):
     if args.verbose >= 1:
         print('Adding nodes to the model')
     idc_mdf = crdclib.mdfAddNodes(idc_mdf, list(nodedict.keys()))
+
+    print(f"Nodes from model: {idc_mdf.nodes.keys()}")
     
     # Add properties
     if args.verbose >= 1:
@@ -328,10 +295,10 @@ def main(args):
     edgelist = []
     for index, row in edge_df.iterrows():
         edgelist.append({
-        'handle': f"of_{row['Destination node']}",
-        'desc': f"Data of {row['Destination node']}",
+        'handle': f"of_{row['Destination node'].lower()}",
+        'desc': f"Data of {row['Destination node'].lower()}",
         'mul': row['Cardinality'],
-        'ends': [{'src': row['Source node'], 'dst': row['Destination node']}]
+        'ends': [{'src': row['Source node'].lower(), 'dst': row['Destination node'].lower()}]
         })
 
     idc_mdf = addEdges(idc_mdf, edgelist, args.verbose)

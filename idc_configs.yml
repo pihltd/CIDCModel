@@ -8,7 +8,7 @@ excludetabs:
   - 'DELETED - Test'
 edgesheet: 'Relationships between nodes'
 handle: NCIISM
-version: '0.0.2'
+version: '0.0.3'
 #mdffile: 'nci_imaging_submission_model.yml'
 mdffiles:
   - Model: 'nci_imaging_submission_model.yml'
