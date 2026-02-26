@@ -164,15 +164,13 @@ def addTags(datamodel, taglist, verbose=0):
     for tag in taglist:
         for tagname, tagvalue in tag.items():
             tagname = tagname.lower()
-            #tagvalue = tagvalue.lower()
-            #print(f"Tag name: {tagname}\nTag Value: {tagvalue}\n")
             print(f"Datamodel: {datamodel}\nNode: {tag['node'].lower()}\n TagName: {tagname}\nTagValue: {tagvalue}\n")
             datamodel = crdclib.mdfAddTags(datamodel, 'node', tag['node'].lower(), {'key':tagname, 'value':tagvalue})
     return datamodel
 
 
 
-def mdfBuildLoadSheets(mdf):
+'''def mdfBuildLoadSheets(mdf):
     """Uses an MDF model to build a complete set of load sheets suitable for use in the Submission Portal.  Returns a dictionary of dataframes with the node as the key.  Note that the 'type' column is NOT added by this routine.
     Note that the node,property field is added to the SRC node of the edges.
     
@@ -231,7 +229,7 @@ def mdfBuildLoadSheets(mdf):
 
         load_df = pd.DataFrame(columns=nodelist)
         loadsheets[node] = load_df
-    return loadsheets
+    return loadsheets'''
 
 
         
@@ -259,7 +257,6 @@ def main(args):
         elif node not in configs['excludetabs']:
             temp_df = pd.read_excel(configs['workingpath']+configs['excelfile'], node)
             nodedict[node.lower()] = temp_df
-    print(f"Final node list: {list(nodedict.keys())}")
     
     # Create an empty model object
     if args.verbose >= 1:
@@ -320,7 +317,6 @@ def main(args):
         if args.verbose >= 1:
             print(f"Writing data load sheets in {configs['loadsheetpath']}")
         load_df = crdclib.mdfBuildLoadSheets(idc_mdf, reverse=False, typecolumn=True)
-        #load_df = mdfBuildLoadSheets(idc_mdf)
         for node, loadsheet_df in load_df.items():
             filename = f"{configs['loadsheetpath']}NCI_Imaging_Data_Loading_Template_{node}.tsv"
             loadsheet_df.to_csv(filename, sep="\t", index=False)
